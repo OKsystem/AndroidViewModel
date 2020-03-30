@@ -47,6 +47,37 @@ public class ProxyViewHelper {
         return null;
     }
 
-    private static final InvocationHandler sInvocationHandler = (proxy, method, args) -> null;
+    private static final InvocationHandler sInvocationHandler = (proxy, method, args) -> {
+        if (String.class == method.getReturnType()) {
+            return "";
+        }
+        else if (Integer.class == method.getReturnType()) {
+            return 0;
+        }
+        else if (int.class == method.getReturnType()) {
+            return 0;
+        }
+        else if (Float.class == method.getReturnType()) {
+            return 0f;
+        }
+        else if (float.class == method.getReturnType()) {
+            return 0f;
+        }
+        else if (Double.class == method.getReturnType()) {
+            return (double) 0;
+        }
+        else if (double.class == method.getReturnType()) {
+            return (double) 0;
+        }
+        else if (Boolean.class == method.getReturnType()) {
+            return Boolean.FALSE;
+        }
+        else if (boolean.class == method.getReturnType()) {
+            return false;
+        }
+        else {
+            return null;
+        }
+    };
 
 }
