@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
         google()
     }
@@ -10,10 +11,12 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
+        mavenLocal()
+        maven {
+            url "http://mavenrepo.oksystem.local/repo/default"
+        }
         google()
+        mavenCentral()
+        jcenter()
     }
-	
-    group = 'eu.inloop'
-    version = VERSION_NAME
 }

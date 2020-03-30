@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 1
-        versionName VERSION_NAME
+        versionCode Integer.parseInt(project.VERSION_CODE)
+        versionName project.VERSION_NAME
         consumerProguardFiles 'proguard-rules.pro'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,9 +54,12 @@ artifacts {
 
 uploadArchives {
     repositories.mavenDeployer {
-        pom.groupId = 'eu.inloop'
+        pom.groupId = GROUP
         pom.artifactId = 'androidviewmodel'
         pom.version = VERSION_NAME
-		repository(url: "file://${System.env.HOME}/.m2/repository")
+        repository url: 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
+        repository url: "http://" + MAVEN_REPO + "-${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }"
     }
 }
+
+task install(dependsOn: uploadArchives)
